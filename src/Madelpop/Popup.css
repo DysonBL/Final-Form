@@ -1,0 +1,19 @@
+.users{
+    list-style: none;
+    color: rgb(5, 5, 5);
+}
+.modal{
+    background-color:rgb(25, 85, 212)
+}
+p{
+    color:rgb(247, 40, 40);
+}
+.Button{
+    text-align: center;
+}
+.accept{
+    margin: 2rem;
+}
+.cancel{
+    margin:2rem ;
+}

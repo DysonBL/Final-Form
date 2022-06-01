@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+    color: rgb(6, 85, 6);
+  }
+  h4{
+    color: darkgreen;
+  }
+  
+  .lable {
+    color: rgb(24, 123, 19);
+  }
+  .sign {
+    padding-left: 20rem;
+    padding-right:20rem;
+    margin-top:0px;
+  }
+  .Margin {
+    margin-top: 0rem;
+  }
+  
+  .signbut {
+    margin-top: 2px;
+    margin-left: 2rem;
+  }
+  .btnAlign {
+    padding-top: 1rem;
+    text-align: center;
+  }
+  
+ 
