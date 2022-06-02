@@ -21,11 +21,11 @@ const [validate,setValidate]=useState(false)
   });
 
   
-  const handleChange = async (e) => {
+  const handleChange = async (e:any) => {
     setData({ ...Data, [e.target.name]: e.target.value });
     console.log(Data, "sign");
   };
-  const signSubmit = (e) => {
+  const signSubmit = (e:any) => {
     e.preventDefault();
     let localdata = localStorage.getItem('Sign');
 

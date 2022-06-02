@@ -3,12 +3,13 @@ import Styles from "./Styles";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import Popup from "../../Madelpop/Popup";
+import React from "react";
 
 const Forms = () => {
-  const required = (values) => (values ? undefined : "must fil Name");
-  const mustBeMail = (values) => (values ? undefined : "must fil Email");
-  const mustBePass = (values) =>
-    isNaN(values) ? undefined : "only number feild";
+  const required = (values: any) => (values ? undefined : "must fil Name");
+  const mustBeMail = (values:any) => (values ? undefined : " fil in Email");
+  const mustBePass = (values:any) => (values? undefined : "Fill in correct password");
+  const mustBeAge = (values:any) => (values ? undefined : " fil in Age");
 
   const [Show, setShow] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -16,18 +17,17 @@ const Forms = () => {
     Name: "",
     Email: "",
     password: "",
-    Age: "",
+    Age: ""
   });
-  const onSubmit = (data) => {
+  
+  const onSubmit = (data:any) => {
     setData(data);
     JSON.stringify(data);
-    console.log(data,"value")
-    let Data = localStorage.getItem("Sign");
-    console.log(Data, "Dataa");
-    let newDatas = JSON.parse(Data);
-    console.log(newDatas, "Newww");
-    let userData = newDatas.find(
-      (item) =>
+     console.log(data,"value")
+    let Data = JSON.parse(localStorage.getItem("Sign")||"{}")
+    console.log(Data, "Newww");
+    let userData = Data.find(
+      (item:any) =>
         item.Name === data.Name &&
         item.Email === data.Email &&
         item.password === data.password &&
@@ -35,7 +35,6 @@ const Forms = () => {
     );
     console.log(data.Email, "Dayaa");
     console.log(userData, "NewData");
-    console.log(userData, "user");
 
     if (userData) {
       setShowPopup(true);
@@ -50,7 +49,7 @@ const Forms = () => {
       <Form
         onSubmit={onSubmit}
         initialValues={{ Name: "", Email: "", password: "", Age: "" }}
-        render={({ handleSubmit, form, submitting, values, pristine }) => (
+        render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <h1>Final Form</h1>
             <hr />
@@ -89,7 +88,7 @@ const Forms = () => {
               </Field>
             </div>
             <div>
-              <Field name="Age" validate={required}>
+              <Field name="Age" validate={mustBeAge}>
                 {({ input, meta }) => (
                   <div>
                     <label className="lable">Age</label>

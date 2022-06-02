@@ -5,7 +5,7 @@ import "./Popup.css";
 import { useNavigate } from "react-router-dom";
 
 
-function Popup(props) {
+function Popup(props:any) {
   let navigate = useNavigate()
   const [popShow, setPopShow] = useState(false);
   const [popData, setPopData] = useState({
@@ -19,7 +19,7 @@ function Popup(props) {
 
   const handleSubmit = () => {
     console.log("Accept");
-    navigate('/Home')
+    navigate('/Page')
   };
   const onSubmit = () => {
     console.log("Cancel");
