@@ -19,7 +19,7 @@ const Navs =()=>{
       <Navbar.Brand href="">JWT_Learn</Navbar.Brand>
       <Nav className="me-auto">
         <Nav.Link href="/">Signup</Nav.Link>
-        <Nav.Link href="/Form">Add user</Nav.Link>
+        <Nav.Link href="/Form">POST user</Nav.Link>
         <Button onClick={handleSubmit}>LOGOUT</Button>
         
       </Nav>

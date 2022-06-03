@@ -1,33 +1,37 @@
 import { Form, Field } from "react-final-form";
 import Styles from "./Styles";
 import { Button } from "react-bootstrap";
-import { useState } from "react";
-import Popup from "../../Madelpop/Popup";
+import { useEffect, useState } from "react";
+import Popup from "../Madelpop/Popup";
 import React from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { GET_USER } from "../Redux/ActionType";
+import axios from "axios";
 
 const Forms = () => {
   const required = (values: any) => (values ? undefined : "must fil Name");
-  const mustBeMail = (values:any) => (values ? undefined : " fil in Email");
-  const mustBePass = (values:any) => (values? undefined : "Fill in correct password");
-  const mustBeAge = (values:any) => (values ? undefined : " fil in Age");
+  const mustBeMail = (values: any) => (values ? undefined : " fil in Email");
+  const mustBePass = (values: any) =>
+    values ? undefined : "Fill in correct password";
+  const mustBeAge = (values: any) => (values ? undefined : " fil in Age");
 
   const [Show, setShow] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [getApi, setGetApi] = useState("");
   const [data, setData] = useState({
     Name: "",
     Email: "",
     password: "",
-    Age: ""
+    Age: "",
   });
-  
-  const onSubmit = (data:any) => {
+  const onSubmit = (data: any) => {
     setData(data);
     JSON.stringify(data);
-     console.log(data,"value")
-    let Data = JSON.parse(localStorage.getItem("Sign")||"{}")
+    console.log(data, "value");
+    let Data = JSON.parse(localStorage.getItem("Sign") || "{}");
     console.log(Data, "Newww");
     let userData = Data.find(
-      (item:any) =>
+      (item: any) =>
         item.Name === data.Name &&
         item.Email === data.Email &&
         item.password === data.password &&
@@ -35,6 +39,8 @@ const Forms = () => {
     );
     console.log(data.Email, "Dayaa");
     console.log(userData, "NewData");
+    console.log(getApi, "statee");
+
 
     if (userData) {
       setShowPopup(true);
@@ -43,6 +49,17 @@ const Forms = () => {
       alert("Your Email and Password Miss match");
     }
   };
+  useEffect(() => {
+    axios
+      .get("http://localhost:3006/users")
+      .then((res: any) => {
+        console.log(res.data, "GetuserApi");
+        setGetApi(res.data);
+      })
+      .catch((error) => {
+        console.log(error, "getapiError");
+      });
+  }, []);
 
   return (
     <Styles>
@@ -100,11 +117,15 @@ const Forms = () => {
             </div>
 
             <div className="buttons">
-              <Button variant="success" type="submit" disabled={submitting || pristine}>
+              <Button
+                variant="success"
+                type="submit"
+                disabled={submitting || pristine}
+              >
                 submit
               </Button>
               <Button
-              variant="info"
+                variant="info"
                 type="button"
                 onClick={form.reset}
                 disabled={submitting || pristine}
@@ -120,3 +141,6 @@ const Forms = () => {
   );
 };
 export default Forms;
+function state(state: any, arg1: string) {
+  throw new Error("Function not implemented.");
+}

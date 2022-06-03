@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "Name": "Henry",
+      "Email": "henry@gmail.com",
+      "Age": "23"
+    },
+    {
+      "id": 2,
+      "Name": "Dyson",
+      "Email": "dyson@gmail.com",
+      "Age": "23"
+    },
+    {
+      "id": 3,
+      "Name": "Felix",
+      "Email": "Felix@gmail.com",
+      "Age": "23"
+    },
+    {
+      "id": 4,
+      "Name": "Stanly",
+      "Email": "stanly@gmail.com",
+      "Age": "23"
+    },
+    {
+      "Name": "",
+      "Email": "",
+      "password": "",
+      "Age": "",
+      "checkbox": "",
+      "id": 5
+    }
+  ]
+}

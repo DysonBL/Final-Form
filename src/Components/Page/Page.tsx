@@ -2,41 +2,32 @@ import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import "./Page.css";
 import Edit from "../EditButton/Edit";
+import axios from "axios";
 
 function Page() {
-  const [state, setState] = useState([]);
+  const [User,setUser]=useState([]);
 
-  useEffect(() => {
-    let Data = JSON.parse(localStorage.getItem("Sign") || "{}");
-    // let newDatas = JSON.parse(Data);
-    console.log(Data, "User");
-    setState(Data);
-  }, []);
+useEffect(()=>{
+  axios.get("http://localhost:3006/users")
+  .then((res:any)=>{
+      console.log(res,"GetuserApi")
+      setUser(res.data)
+  })
+  .catch((error)=>{
+    console.log(error,"getapiError")
+});
+},[])
 
-  const handleEdit = (e:any) => {
-    console.log(e,"Pages1");
-    let Data = JSON.parse(localStorage.getItem("Sign") || "{}");
-
-    let userData = Data?.filter((item: any) => item.Name === e.Name);
-    console.log(userData,"2")
-    localStorage.setItem("Sign", JSON.stringify(userData));
-    console.log(localStorage,"3")
-
+  const handleEdit = () => {
+   
   };
 
+  const handleDelete = () => {
 
-  const handleDelete = (e: any) => {
-    console.log("obj1", e);
-    let Data = JSON.parse(localStorage.getItem("Sign") || "{}");
-console.log(Data,"local2")
-    let userData = Data?.filter((item: any) => item.Name !== e.Name);
-console.log(userData,"del3")
-    localStorage.setItem("Sign", JSON.stringify(userData));
-console.log(localStorage,"remain4")
-    setState(userData);
 
-    console.log(userData, "delldataa5");
   };
+  console.log(User,"stateUser")
+
 
   return (
     <div>
@@ -44,8 +35,8 @@ console.log(localStorage,"remain4")
       <div className="row sm-6 col-md-8">
         <div className="col-12 sm-6 ">
           <div className="row">
-            {state &&
-              state.map((Data: any) => {
+            {
+              User.map((data: any) => {
                 return (
                   <div className="col-3">
                     <Card style={{ width: "12rem" }}>
@@ -60,15 +51,15 @@ console.log(localStorage,"remain4")
                           <h3>Welcom User</h3>
                         </Card.Title>
                         <div className="user">
-                          <li>Name:{Data.Name}</li>
-                          <li>Email:{Data.Email}</li>
-                          <li>Age:{Data.Age}</li>
+                          <li>Name:{data.Name}</li>
+                          <li>Email:{data.Email}</li>
+                          <li>Age:{data.Age}</li>
                         </div>
                         <div className="d-flex ">
                           <Button
                             style={{ marginRight: "2px" }}
                             variant="success"
-                            onClick={() => handleDelete(Data)}
+                            onClick={handleDelete}
                           >
                             Del
                           </Button>

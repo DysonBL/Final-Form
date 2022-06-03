@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
+import {POST_USER} from "../Redux/ActionType";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Form,
@@ -8,7 +10,11 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css"
+
+
 const Signup = () => {
+
+let dispatch:any =useDispatch()
 let navigate=useNavigate()
 const [validate,setValidate]=useState(false)
 
@@ -25,31 +31,18 @@ const [validate,setValidate]=useState(false)
     setData({ ...Data, [e.target.name]: e.target.value });
     console.log(Data, "sign");
   };
-  const signSubmit = (e:any) => {
-    e.preventDefault();
-    let localdata = localStorage.getItem('Sign');
 
-    if (localdata) {
-      let local = JSON.parse(localdata);
-      local.push(Data);
-      localStorage.setItem('Sign', JSON.stringify(local));
-    } else {
-      localStorage.setItem('Sign', JSON.stringify([Data]));
-    }
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
 
-    setValidate(true);
-    if(Data.Name !== "" && Data.Email!=="" &&Data.password!==""&& Data.Age!=="" && Data.checkbox!==""){
-     navigate("/Form");
-
-    }
-    //  navigate("/Form");
+  const signSubmit =(e:any)=>{
+    e.preventDefault()
+     setValidate(true);
+    dispatch(POST_USER(Data))
+   
+ if(Data.Name !== "" && Data.Email!=="" &&Data.password!==""&& Data.Age!=="" && Data.checkbox!==""){
+  navigate("/Form");
+    console.log(dispatch,"dispatch")
   };
-
+  }
   return (
     <div>
       <div>
