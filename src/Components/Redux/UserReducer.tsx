@@ -8,16 +8,18 @@ export const UserReducer = (
   action: { type: any; data: any }
 ) => {
   
-  switch (action.data) {
+  switch (action.type) {
     case ActionType.GET_USER:
-      console.log(action.data,"getuser")
-      return {...state, userget: action.data };
+      return {...state, user: action.data };
+
     case ActionType.POST_USER:
-      return { state, userpost: action.data };
-    // case ActionType.PUT_USER:
-    //   return state;
-    // case ActionType.DELETE_USER:
-    //   return state;
+      return { state, user: action.data };
+
+    case ActionType.PUT_USER:
+      return {...state.user.filter((useredit)=>useredit !==action.data)};
+
+    case ActionType.DELETE_USER:
+      return {...state.user.filter((userdel)=>userdel !==action.data)};
     default:
       return state;
   }

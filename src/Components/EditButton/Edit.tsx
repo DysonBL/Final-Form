@@ -1,46 +1,107 @@
-import React, { useState } from "react";
-import { FormControl, Offcanvas, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Card } from "react-bootstrap";
+import { TextField, Button } from "@mui/material";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch} from "react-redux";
+import {  PUT_USER } from "../Redux/ActionType";
+import axios from "axios";
+
 const Edit = () => {
-  const [Show, setShow] = useState(false);
+  let dispatch:any = useDispatch();
+  let navigate = useNavigate();
+  const [putData,setPutData]= useState<any>()
+  const [Data, setData] = useState<any>({
+    Name: '',
+    Email:"",
+    Age: ""
+  });
 
-  const handleShow = () => {
-    console.log("slideOpen");
-    setShow(true);
-  };
-  const handleClose = () => {
-    setShow(false);
-    console.log("hi");
+  const handleChange = (e: any) => {
+    setData({ ...Data, [e.target.name]: e.target.value });
+    console.log(Data, "Initial Data");
   };
 
+  let { id } = useParams();
+  console.log("newid",id);
+
+  useEffect(()=>{
+    axios
+    .get(`http://localhost:3006/users/${id}`)
+    .then((res) => {
+      console.log(res.data, "GetuserApi");
+      setPutData(res.data)
+    })
+    .catch((error) => {
+      console.log(error, "getapiError");
+    });
+  },[])
+  console.log(putData,"setPutData");
+  // useEffect(() => {
+  //   if (userData !== undefined) {
+  //     dispatch(GET_USER());
+  //   }
+  // }, []);
+  useEffect(() => {
+    if (putData) {
+      setData(putData);
+    }
+  }, [putData]);
+  console.log(Data, "EDITData");
+
+  const handleCreate = (e:any) => {
+    e.preventDefault();
+    dispatch(PUT_USER(id,Data))
+    navigate("/Page");
+  };
   return (
     <>
-      <div>
-        <Button variant="success" onClick={handleShow}>
-          <div className="menu"></div>
-          <div className="menu"></div>
-          <div className="menu"></div>
-        </Button>
-      </div>
-      <div className="offcanvas">
-        <Offcanvas show={Show} onHide={handleClose}>
-          <Offcanvas.Header closeButton className="header">
-            <Offcanvas.Title>Edit User</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body className="slideBody">
-            <hr />
-            <div>
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-            </div>
-          </Offcanvas.Body>
-        </Offcanvas>
+      <div className=" row-6 row-md-6">
+        <div className="col-9">
+          <Card style={{ width: "48rem" }} className="bg-dark text-white">
+            <Card.Img src="https://sm.mashable.com/t/mashable_in/help/h/how-to-cha/how-to-change-your-snapchat-user-name_wstd.1248.png" />
+            <Card.ImgOverlay>
+              <Card.Title>
+                <h1>EDIT USER DETAILS</h1>
+              </Card.Title>
+              <Card.Text style={{ margin: "7rem" }}>
+                <div>
+                  {" "}
+                  <TextField
+                    label="Name"
+                    value={Data.Name}
+                    onChange={handleChange}
+                    name="Name"
+                  />
+                </div>
+                <div>
+                  {" "}
+                  <TextField
+                    label="Email"
+                    value={Data.Email}
+                    onChange={handleChange}
+                    name="Email"
+                  />{" "}
+                </div>
+                <div>
+                  {" "}
+                  <TextField
+                    label="Age"
+                    value={Data.Age}
+                    onChange={handleChange}
+                    name="Age"
+                  />
+                </div>
+              </Card.Text>
+              <Card.Text></Card.Text>
+            </Card.ImgOverlay>
+            <Button className="text-white" onClick={handleCreate}>
+              SAVE EDIT
+            </Button>
+          </Card>
+        </div>
       </div>
     </>
   );
 };
-
 export default Edit;

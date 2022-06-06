@@ -4,9 +4,8 @@ import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Popup from "../Madelpop/Popup";
 import React from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { GET_USER } from "../Redux/ActionType";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { GET_USER } from "../Redux/ActionType";
 
 const Forms = () => {
   const required = (values: any) => (values ? undefined : "must fil Name");
@@ -17,7 +16,10 @@ const Forms = () => {
 
   const [Show, setShow] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [getApi, setGetApi] = useState("");
+  const userData = useSelector((state: any) => state.UserReducer.user);
+
+  let dispatch: any = useDispatch();
+
   const [data, setData] = useState({
     Name: "",
     Email: "",
@@ -27,9 +29,7 @@ const Forms = () => {
   const onSubmit = (data: any) => {
     setData(data);
     JSON.stringify(data);
-    console.log(data, "value");
     let Data = JSON.parse(localStorage.getItem("Sign") || "{}");
-    console.log(Data, "Newww");
     let userData = Data.find(
       (item: any) =>
         item.Name === data.Name &&
@@ -37,9 +37,7 @@ const Forms = () => {
         item.password === data.password &&
         item.Age === data.Age
     );
-    console.log(data.Email, "Dayaa");
-    console.log(userData, "NewData");
-    console.log(getApi, "statee");
+  
 
 
     if (userData) {
@@ -50,16 +48,11 @@ const Forms = () => {
     }
   };
   useEffect(() => {
-    axios
-      .get("http://localhost:3006/users")
-      .then((res: any) => {
-        console.log(res.data, "GetuserApi");
-        setGetApi(res.data);
-      })
-      .catch((error) => {
-        console.log(error, "getapiError");
-      });
+    if(userData !== undefined){
+      dispatch(GET_USER());
+    }
   }, []);
+
 
   return (
     <Styles>
@@ -133,7 +126,7 @@ const Forms = () => {
                 Reset
               </Button>
             </div>
-            {Show === true && <Popup passdata={data} show={showPopup} />}
+            {Show === true && <Popup passdata={userData} show={showPopup} />}
           </form>
         )}
       />
@@ -141,6 +134,3 @@ const Forms = () => {
   );
 };
 export default Forms;
-function state(state: any, arg1: string) {
-  throw new Error("Function not implemented.");
-}

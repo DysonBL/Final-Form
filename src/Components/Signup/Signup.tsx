@@ -40,8 +40,9 @@ const [validate,setValidate]=useState(false)
    
  if(Data.Name !== "" && Data.Email!=="" &&Data.password!==""&& Data.Age!=="" && Data.checkbox!==""){
   navigate("/Form");
-    console.log(dispatch,"dispatch")
+    console.log(dispatch,"dispatch") 
   };
+  localStorage.setItem('Sign', JSON.stringify([Data]));
   }
   return (
     <div>

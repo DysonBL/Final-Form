@@ -10,10 +10,13 @@ export const ActionType = {
 export const GET_USER = () => {
   return async (dispatch:any) => {
     await axios
-      .get("http://localhost:3006/users")
+      .get(`http://localhost:3006/users`)
       .then((res) => {
         console.log(res.data, "GetuserApi");
-        dispatch(res.data)
+        dispatch({
+          type:ActionType.GET_USER,
+          data:res.data
+        })
       })
       .catch((error) => {
         console.log(error, "getapiError");
@@ -28,7 +31,7 @@ export const POST_USER = (data: any) => {
         console.log(res, "postApi");
         dispatch({
           type: ActionType.POST_USER,
-          payload: res.data,
+          data: res.data,
         });
         console.log(dispatch, "Postdispatch");
       })
@@ -37,25 +40,35 @@ export const POST_USER = (data: any) => {
       });
   };
 };
-export const DELETE_USER =()=>{
-    return async()=>{
-        await axios.delete("http://localhost:3006/users")
+export const DELETE_USER =(data:any)=>{
+    return async(dispatch:any)=>{
+        await axios.delete(`http://localhost:3006/users/${data}`)
         .then((res)=>{
-            console.log(res.data,"deleteAPi")
-        })
+            console.log(res,"deleteAPi")
+            dispatch({
+              type:ActionType.DELETE_USER,
+              payload: res.data,
+            })
+            
+            })
         .catch((error)=>{
             console.log(error,"deleteApiError")
         })
-    }
+      }
 }
-export const PUT_USER =()=>{
-    return async()=>{
-        await axios.put("http://localhost:3006/users")
+export const PUT_USER =(id: any,data:any)=>{
+    return async(dispatch:any)=>{
+        await axios.put(`http://localhost:3006/users/${id}`,data)
         .then((res)=>{
-            console.log(res.data,"deleteAPi")
+            console.log(res.data,"EDITAPI")
+            dispatch({
+              type:ActionType.PUT_USER,
+              payload:res
+            })
         })
         .catch((error)=>{
-            console.log(error,"deleteApiError")
+            console.log(error,"EDIT_ApiError")
         })
     }
 }
+

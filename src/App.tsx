@@ -4,7 +4,7 @@ import Form from './Components/Form/Form';
 import Navs from './Components/Nav/Navs';
 import Signup from './Components/Signup/Signup';
 import Page from './Components/Page/Page';
-// import Edit from './Components/EditButton/Edit';
+import Edit from './Components/EditButton/Edit';
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
      <Route path='/' element={<Signup/>}/>
      <Route path='/Form' element={<Form/>}/>
      <Route path='/Page' element={<Page/>}/>
-     {/* <Route path='/Edit' element={<Edit/>}/> */}
+     <Route path='/Edit/:id' element={<Edit/>}/>
      </Routes>        
      </BrowserRouter>
     </div>
