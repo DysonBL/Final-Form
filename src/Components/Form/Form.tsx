@@ -37,15 +37,15 @@ const Forms = () => {
         item.password === data.password &&
         item.Age === data.Age
     );
-  
-
-
     if (userData) {
       setShowPopup(true);
       setShow(true);
     } else {
       alert("Your Email and Password Miss match");
     }
+
+  
+
   };
   useEffect(() => {
     if(userData !== undefined){

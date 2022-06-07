@@ -10,7 +10,8 @@ import {
 
 const Navs =()=>{       
     const handleSubmit=()=>{
-
+      localStorage.removeItem("Login")
+      // window.location.reload(true);
     }
   return (
     <div>

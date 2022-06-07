@@ -5,7 +5,7 @@ import { Navigate} from "react-router";
     
     const auth= localStorage.getItem('Sign');
     console.log(auth,"Private routing")
-    return ( auth?  children:<Navigate to="/Page"/>)
+    return ( auth?  children:<Navigate to="/Form"/>)
 
         
  }
