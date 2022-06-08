@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Popup from "../Madelpop/Popup";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_USER } from "../Redux/ActionType";
+import { GET_USER,POST_LOGUSER } from "../Redux/ActionType";
 
 const Forms = () => {
   const required = (values: any) => (values ? undefined : "must fil Name");
@@ -26,6 +26,7 @@ const Forms = () => {
     password: "",
     Age: "",
   });
+  console.log(data,"popupbid")
   const onSubmit = (data: any) => {
     setData(data);
     JSON.stringify(data);
@@ -40,12 +41,11 @@ const Forms = () => {
     if (userData) {
       setShowPopup(true);
       setShow(true);
+      dispatch(POST_LOGUSER(data))
+      dispatch(GET_USER())
     } else {
       alert("Your Email and Password Miss match");
     }
-
-  
-
   };
   useEffect(() => {
     if(userData !== undefined){
@@ -134,3 +134,4 @@ const Forms = () => {
   );
 };
 export default Forms;
+

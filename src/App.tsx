@@ -6,7 +6,7 @@ import Signup from './Components/Signup/Signup';
 import Page from './Components/Page/Page';
 import Edit from './Components/EditButton/Edit';
 import ErrorBoudry from './Components/ErrorBontry/ErrorBoudry';
-import PrivateRouting from "./Components/PrivateRouting/PrivateRouting";
+// import PrivateRouting from "./Components/PrivateRouting/PrivateRouting";
 
 
 const App = () => {
@@ -20,9 +20,9 @@ const App = () => {
      <Route path='/Form' element={<Form/>}/>
      <Route path='/Edit/:id' element={<Edit/>}/>
      <Route path='/Page' element={
-       <PrivateRouting>
+      //  <PrivateRouting>
          <Page/>
-       </PrivateRouting>
+      //  </PrivateRouting>
      }/>
      </Routes>        
      </ErrorBoudry>
