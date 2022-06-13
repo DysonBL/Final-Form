@@ -14,9 +14,9 @@ export const ActionType = {
 export const GET_USER = () => {
   return async (dispatch:any) => {
     await axios
-      .get(`http://localhost:3002/user`)
+      .get(`http://localhost:3002/Data`)
       .then((res) => {
-        console.log(res.data, "GetuserApi");
+        console.log(res.data.item, "GetuserApi");
         dispatch({
           type:ActionType.GET_USER,
           data:res.data
@@ -27,28 +27,13 @@ export const GET_USER = () => {
       });
   };
 };
-export const POST_USER = (data: any) => {
-  return async (dispatch: any) => {
-    await axios
-      .post("http://localhost:3002/user", data)
-      .then((res) => {
-        console.log(res, "postApi");
-        dispatch({
-          type: ActionType.POST_USER,
-          data: res.data,
-        });
-        console.log(dispatch, "Postdispatch");
-      })
-      .catch((error) => {
-        console.log(error, "postApiError");
-      });
-  };
-};
+
 export const DELETE_USER =(data:any)=>{
+  console.log(data,"deletedispatch")
     return async(dispatch:any)=>{
-        await axios.delete(`http://localhost:3002/user/${data}`)
+        await axios.delete(`http://localhost:3002/Data/:id${data}`)
         .then((res)=>{
-            console.log(res,"deleteAPi")
+            console.log(res,"deleteAPiIn DELETE_USER")
             dispatch({
               type:ActionType.DELETE_USER,
               payload: res.data,
@@ -62,12 +47,12 @@ export const DELETE_USER =(data:any)=>{
 }
 export const PUT_USER =(id: any,data:any)=>{
     return async(dispatch:any)=>{
-        await axios.put(`http://localhost:3002/user/${id}`,data)
+        await axios.put(`http://localhost:3002/Data/${id}`,data)
         .then((res)=>{
             console.log(res.data,"EDITAPI")
             dispatch({
               type:ActionType.PUT_USER,
-              payload:res
+              payload:res.data
             })
         })
         .catch((error)=>{
@@ -83,7 +68,7 @@ export const POST_SIGNUSER = (data: any) => {
       .then((res) => {
         dispatch({
           type: ActionType.POST_USER,
-          data: res.data,
+          data: res.data.item,
         });
       })
       .catch((error) => {
@@ -100,7 +85,7 @@ export const POST_LOGUSER = (data: any) => {
         TokenService.RefreshToken(res.data.Token)
         dispatch({
           type: ActionType.POST_USER,
-          data: res.data,
+          data: res.data.item,
         });
       })
       .catch((error) => {

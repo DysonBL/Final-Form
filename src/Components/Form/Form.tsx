@@ -6,6 +6,7 @@ import Popup from "../Madelpop/Popup";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_USER,POST_LOGUSER } from "../Redux/ActionType";
+import { v4 as uuidv4 } from 'uuid';
 
 const Forms = () => {
   const required = (values: any) => (values ? undefined : "must fil Name");
@@ -21,12 +22,13 @@ const Forms = () => {
   let dispatch: any = useDispatch();
 
   const [data, setData] = useState({
+    id:uuidv4(),
     Name: "",
     Email: "",
     password: "",
-    Age: "",
+    Age: ""
   });
-  console.log(data,"popupbid")
+  console.log(data,"loginData")
   const onSubmit = (data: any) => {
     setData(data);
     JSON.stringify(data);
@@ -36,7 +38,8 @@ const Forms = () => {
         item.Name === data.Name &&
         item.Email === data.Email &&
         item.password === data.password &&
-        item.Age === data.Age
+        item.Age === data.Age 
+
     );
     if (userData) {
       setShowPopup(true);
@@ -58,7 +61,7 @@ const Forms = () => {
     <Styles>
       <Form
         onSubmit={onSubmit}
-        initialValues={{ Name: "", Email: "", password: "", Age: "" }}
+        initialValues={{ Name: "", Email: "", password: "", Age: "",id:"" }}
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <h1>Final Form</h1>

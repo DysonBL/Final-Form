@@ -1,21 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import "./Page.css";
-import { useDispatch, useSelector } from "react-redux";
-import { DELETE_USER, GET_USER } from "../Redux/ActionType";
+import { useDispatch } from "react-redux";
+import {DELETE_USER,GET_USER} from "../Redux/ActionType";
 import { useNavigate} from "react-router-dom";
+import axios from "axios";
 
 
 function Page() {
   let navigate =useNavigate()
-  const userData = useSelector((state: any) => state.UserReducer.user);
-  console.log(userData, "sueee");
+  const [userData,setUserData]= useState<any[]>();
+  // const userData = useSelector((state: any) => state.UserReducer.user);
+  console.log(userData,"userDAtataa");
   let dispatch: any = useDispatch();
 
   useEffect(() => {
-    if (userData !== undefined) {
-      dispatch(GET_USER());
-    }
+    // if (userData.user !== undefined) {
+    //   dispatch(GET_USER());
+    // }
+    axios
+      .get(`http://localhost:3002/Data`)
+      .then((res) => {
+        console.log(res.data.item, "GetuserApi");
+       setUserData(res.data.item)
+      })
+      .catch((error) => {
+        console.log(error, "getapiError");
+      });
   }, []);
 
   const handleEdit = (e: any,data:any) => {
@@ -26,8 +37,9 @@ function Page() {
 
   const handleDelete = (e: any, data: any) => {
     e.preventDefault();
+    console.log(data,"deletehandle")
     dispatch(DELETE_USER(data));
-    dispatch(GET_USER());
+    dispatch(GET_USER())
   };
 
   return (
@@ -35,7 +47,7 @@ function Page() {
       <h1>Welcome My Home Page</h1>
       <div className="row sm-6 col-md-8">
         <div className="col-12 sm-6 ">
-          <div className="row">
+          <div className="row" >
             {userData?.map((data: any) => {
               return (
                 <div className="col-3">
@@ -54,6 +66,7 @@ function Page() {
                         <li>Name:{data.Name}</li>
                         <li>Email:{data.Email}</li>
                         <li>Age:{data.Age}</li>
+                        <li>Id:{data.id}</li>
                       </div>
                       <div className="d-flex ">
                         <Button
@@ -84,4 +97,5 @@ function Page() {
 }
 
 export default Page;
+
 

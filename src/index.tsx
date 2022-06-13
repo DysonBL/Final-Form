@@ -25,7 +25,7 @@ axios.interceptors.request.use((request: any) => {
 axios.interceptors.response.use(
 
   (response: any) => {
-    console.log(response, "Interceptor give response");
+    console.log(response, "Interceptor given response");
     return response
   },
   async (error) => {
@@ -43,9 +43,9 @@ axios.interceptors.response.use(
             "content-type": "application/json",
           });
           console.log(RefreshToken, "RefreshToken  got");
-          //console.log("refresh api called", response.data.Token);
-          //TokenService.UpdateAccessToken(response.data.status.Token);
-          // axios.defaults.headers.common["x-access-token"] = response.data.data.Token;
+          console.log("refresh api called", RefreshToken?.data.Token);
+          TokenService.UpdateAccessToken(RefreshToken?.data.status.Token);
+          axios.defaults.headers.common["x-access-token"] = RefreshToken?.data.data.Token;
         }
         catch (error) {
           return Promise.reject(error);
@@ -53,7 +53,8 @@ axios.interceptors.response.use(
       }
     }
     return Promise.reject(error);
-  })
+  }
+  )
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

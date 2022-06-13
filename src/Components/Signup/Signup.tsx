@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { POST_SIGNUSER, POST_USER } from "../Redux/ActionType";
+import { POST_SIGNUSER} from "../Redux/ActionType";
 import { useDispatch } from "react-redux";
 import {
   Button,
@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css"
-
+import { v4 as uuidv4 } from 'uuid';
 
 const Signup = () => {
 
@@ -19,12 +19,14 @@ const Signup = () => {
   const [validate, setValidate] = useState(false)
 
   const [Data, setData] = useState({
+    id:uuidv4(),
     Name: "",
     Email: "",
     password: "",
     Age: "",
     checkbox: ""
   });
+  console.log(Data,"signupData")
   const handleChange = async (e: any) => {
     setData({ ...Data, [e.target.name]: e.target.value });
   };
@@ -32,7 +34,6 @@ const Signup = () => {
     e.preventDefault()
     setValidate(true);
     dispatch(POST_SIGNUSER(Data))
-    dispatch(POST_USER(Data))
     if (Data.Name !== "" && Data.Email !== "" && Data.password !== "" && Data.Age !== "" && Data.checkbox !== "") {
       navigate("/Form");
       console.log(dispatch, "dispatch")

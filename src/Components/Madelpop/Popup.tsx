@@ -3,13 +3,15 @@ import { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "./Popup.css";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 
 function Popup(props:any) {
   let navigate = useNavigate()
   const [popShow, setPopShow] = useState(false);
   const [popData, setPopData] = useState({
-    Name: "",
+    id:uuidv4(),
+     Name: "",
     Email: "",
     password: "",
     Age: "",
@@ -60,6 +62,7 @@ function Popup(props:any) {
               {" "}
               Age:<p>{popData.Age}</p>
             </li>
+            
           </ul>
           <h4>If the user is correct</h4>
         </Modal.Body>

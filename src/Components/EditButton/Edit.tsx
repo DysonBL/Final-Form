@@ -8,6 +8,7 @@ import {  PUT_USER } from "../Redux/ActionType";
 import axios from "axios";
 
 const Edit = () => {
+  console.log("EDIT POPUP")
   let dispatch:any = useDispatch();
   let navigate = useNavigate();
   const [putData,setPutData]= useState<any>()
@@ -27,10 +28,10 @@ const Edit = () => {
 
   useEffect(()=>{
     axios
-    .get(`http://localhost:3006/users/${id}`)
+    .get(`http://localhost:3002/Data`)
     .then((res) => {
-      console.log(res.data, "GetuserApi");
-      setPutData(res.data)
+      console.log(res.data.item, "GetuserApi");
+      setPutData(res.data.item)
     })
     .catch((error) => {
       console.log(error, "getapiError");
