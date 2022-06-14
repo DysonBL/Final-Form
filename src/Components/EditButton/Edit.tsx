@@ -28,21 +28,17 @@ const Edit = () => {
 
   useEffect(()=>{
     axios
-    .get(`http://localhost:3002/Data`)
+    .get(`http://localhost:3002/Data/${id}`)
     .then((res) => {
-      console.log(res.data.item, "GetuserApi");
-      setPutData(res.data.item)
+      console.log(res.data.Data, "GetuserApiFrom Edit");
+      setPutData(res.data.Data)
     })
     .catch((error) => {
-      console.log(error, "getapiError");
+      console.log(error, "getapiErrorFrom Edit");
     });
   },[])
   console.log(putData,"setPutData");
-  // useEffect(() => {
-  //   if (userData !== undefined) {
-  //     dispatch(GET_USER());
-  //   }
-  // }, []);
+  
   useEffect(() => {
     if (putData) {
       setData(putData);
@@ -52,7 +48,7 @@ const Edit = () => {
 
   const handleCreate = (e:any) => {
     e.preventDefault();
-    dispatch(PUT_USER(id,Data))
+    dispatch(PUT_USER(Data.id,Data))
     navigate("/Page");
   };
   return (
@@ -84,7 +80,7 @@ const Edit = () => {
                     name="Email"
                   />{" "}
                 </div>
-                <div>
+                {/* <div>
                   {" "}
                   <TextField
                     label="Age"
@@ -92,7 +88,7 @@ const Edit = () => {
                     onChange={handleChange}
                     name="Age"
                   />
-                </div>
+                </div> */}
               </Card.Text>
               <Card.Text></Card.Text>
             </Card.ImgOverlay>

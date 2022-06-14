@@ -16,5 +16,13 @@ h3{
 .cardIimg{
     height:70px;
     width: 70px;
-    margin-left:3rem;
+}
+.btnPosition{
+    justify-content: center;
+}
+.btnSize{
+    width: 5rem;
+}
+.cardStyle{
+    align-items: center;
 }

@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import "./Signup.css"
 import { v4 as uuidv4 } from 'uuid';
 
+
 const Signup = () => {
 
   let dispatch: any = useDispatch()
@@ -46,12 +47,13 @@ const Signup = () => {
 
         <div className="Margin">
           <h1>Register</h1>
-          <Form className="sign" noValidate validated={validate} onSubmit={signSubmit}>
+          <Form className="sign formClass" noValidate validated={validate} onSubmit={signSubmit} >
             <InputGroup hasValidation>
-              <div className="container">
-                <InputGroup.Text id="basic-addon1">User Name</InputGroup.Text>
+              <div className="col d-flex">
+                <InputGroup.Text id="basic-addon1" className="inputFieldAlign">User Name</InputGroup.Text>
                 <FormControl
                   placeholder="UserName"
+                  className="mx-3"
                   name="Name"
                   type="Name"
                   onChange={handleChange}
@@ -63,12 +65,13 @@ const Signup = () => {
               </div>
 
             </InputGroup>
-            <InputGroup>
-              <div className="container">
-                <InputGroup.Text id="basic-addon1">Mail ID</InputGroup.Text>
+            <InputGroup className="mt-3">
+              <div className="col d-flex">
+                <InputGroup.Text id="basic-addon1" className="inputFieldAlign">Mail ID</InputGroup.Text>
                 <FormControl
                   placeholder="name@gmail.com"
                   name="Email"
+                  className="mx-3"
                   type="Email"
                   aria-describedby="basic-addon1"
                   onChange={handleChange}
@@ -79,16 +82,17 @@ const Signup = () => {
                 </Form.Control.Feedback>
               </div>
             </InputGroup>
-            <InputGroup className="">
+            <InputGroup className="mt-3">
 
-              <div className="container">
-                <InputGroup.Text id="basic-addon1">
+              <div className="col d-flex">
+                <InputGroup.Text id="basic-addon1" className="inputFieldAlign">
                   Password
                 </InputGroup.Text>
                 <FormControl
                   placeholder="Conform password"
                   type="password"
                   name="password"
+                  className="mx-3"
                   required
                   aria-describedby="basic-addon1"
                   onChange={handleChange}
@@ -97,14 +101,16 @@ const Signup = () => {
                   Please fill a Password.
                 </Form.Control.Feedback>
               </div>
-              <div className="container">
-                <InputGroup.Text id="basic-addon1">
+              <InputGroup className="mt-3">
+              <div className="col d-flex">
+                <InputGroup.Text id="basic-addon1" className="inputFieldAlign">
                   Age
                 </InputGroup.Text>
                 <FormControl
                   placeholder=" Age"
                   type="Number"
                   name="Age"
+                  className="mx-3"
                   required
                   aria-describedby="basic-addon1"
                   onChange={handleChange}
@@ -113,7 +119,8 @@ const Signup = () => {
                   Please fill a Age.
                 </Form.Control.Feedback>
               </div>
-              <Form.Group className="lable">
+              </InputGroup>
+              <Form.Group className="lable mt-3">
                 <FormCheck
                   onChange={handleChange}
                   type="checkbox"

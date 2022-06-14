@@ -1,5 +1,6 @@
 
 const AccessToken=(user:any)=>{
+    console.log("userrrrr",user)
 localStorage.setItem("Access",JSON.stringify(user)||"{}");
 }
 const RefreshToken=(user:any)=>{

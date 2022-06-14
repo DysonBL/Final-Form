@@ -21,6 +21,8 @@ const Forms = () => {
 
   let dispatch: any = useDispatch();
 
+  
+
   const [data, setData] = useState({
     id:uuidv4(),
     Name: "",
@@ -41,10 +43,16 @@ const Forms = () => {
         item.Age === data.Age 
 
     );
+    console.log("userData",userData)
     if (userData) {
       setShowPopup(true);
       setShow(true);
-      dispatch(POST_LOGUSER(data))
+    let value={
+        Name:data.Name,
+        Email:data.Email,
+        password:data.password
+    }
+      dispatch(POST_LOGUSER(value))
       dispatch(GET_USER())
     } else {
       alert("Your Email and Password Miss match");

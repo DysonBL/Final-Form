@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import "./Page.css";
 import { useDispatch } from "react-redux";
-import {DELETE_USER,GET_USER} from "../Redux/ActionType";
+import {DELETE_USER, GET_USER} from "../Redux/ActionType";
 import { useNavigate} from "react-router-dom";
 import axios from "axios";
 
@@ -10,14 +10,11 @@ import axios from "axios";
 function Page() {
   let navigate =useNavigate()
   const [userData,setUserData]= useState<any[]>();
-  // const userData = useSelector((state: any) => state.UserReducer.user);
-  console.log(userData,"userDAtataa");
+ 
   let dispatch: any = useDispatch();
 
   useEffect(() => {
-    // if (userData.user !== undefined) {
-    //   dispatch(GET_USER());
-    // }
+  
     axios
       .get(`http://localhost:3002/Data`)
       .then((res) => {
@@ -32,28 +29,27 @@ function Page() {
   const handleEdit = (e: any,data:any) => {
     e.preventDefault();
     navigate(`/Edit/${data}`)
-    console.log(data,"edit");
+    dispatch(GET_USER())
+    console.log(data,"editDataaa");
   };
 
   const handleDelete = (e: any, data: any) => {
     e.preventDefault();
     console.log(data,"deletehandle")
     dispatch(DELETE_USER(data));
-    dispatch(GET_USER())
+    window.location.reload()
   };
 
   return (
     <div>
       <h1>Welcome My Home Page</h1>
-      <div className="row sm-6 col-md-8">
-        <div className="col-12 sm-6 ">
-          <div className="row" >
+        <div className="row sm-6 ">
             {userData?.map((data: any) => {
               return (
-                <div className="col-3">
-                  <Card style={{ width: "12rem" }}>
+                <div className="col-3 mx-5 mt-3">
+                  <Card style={{ width: "20rem" }} className="cardStyle">
                     <Card.Img
-                      className="cardIimg"
+                      className="cardIimg mt-2"
                       variant="top"
                       src="https://cdn-icons-png.flaticon.com/512/146/146035.png"
                     />
@@ -63,22 +59,24 @@ function Page() {
                         <h3>Welcom User</h3>
                       </Card.Title>
                       <div className="user">
-                        <li>Name:{data.Name}</li>
-                        <li>Email:{data.Email}</li>
-                        <li>Age:{data.Age}</li>
-                        <li>Id:{data.id}</li>
+                        <li className="mt-2">Name:{data.Name}</li>
+                        <li className="mt-2">Email:{data.Email}</li>
+                        {/* <li>Age:{data.Age}</li> */}
+                        <li className="mt-2">Id:{data.id}</li>
                       </div>
-                      <div className="d-flex ">
+                      <div className="d-flex mt-3 btnPosition ">
                         <Button
                           style={{ marginRight: "2px" }}
-                          variant="success"
+                          variant="danger"
+                          className="btnSize"
                           onClick={(e) => handleDelete(e, data.id)}
                         >
-                          Del
+                          Delete
                         </Button>
                         <Button
                           style={{ marginLeft: "30px" }}
                           variant="success"
+                          className="btnSize"
                           onClick={(e)=>handleEdit(e,data.id)}
                         >
                          Edit
@@ -90,9 +88,7 @@ function Page() {
               );
             })}
           </div>
-        </div>
       </div>
-    </div>
   );
 }
 

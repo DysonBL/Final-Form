@@ -31,7 +31,7 @@ export const GET_USER = () => {
 export const DELETE_USER =(data:any)=>{
   console.log(data,"deletedispatch")
     return async(dispatch:any)=>{
-        await axios.delete(`http://localhost:3002/Data/:id${data}`)
+        await axios.delete(`http://localhost:3002/Data/${data}`)
         .then((res)=>{
             console.log(res,"deleteAPiIn DELETE_USER")
             dispatch({
@@ -45,18 +45,20 @@ export const DELETE_USER =(data:any)=>{
         })
       }
 }
-export const PUT_USER =(id: any,data:any)=>{
+export const PUT_USER =(id:any,Data:any)=>{
+  console.log(id,Data,"id and data editt")
+  
     return async(dispatch:any)=>{
-        await axios.put(`http://localhost:3002/Data/${id}`,data)
+        await axios.put(`http://localhost:3002/Data/${id}`,Data)
         .then((res)=>{
-            console.log(res.data,"EDITAPI")
+            console.log(res,"EDITAPIDATAA")
             dispatch({
               type:ActionType.PUT_USER,
               payload:res.data
             })
         })
         .catch((error)=>{
-            console.log(error,"EDIT_ApiError")
+            console.log(error,"EDITDATA_ApiError")
         })
     }
 }
@@ -66,6 +68,8 @@ export const POST_SIGNUSER = (data: any) => {
     await axios
       .post("http://localhost:3002/signup", data)
       .then((res) => {
+        TokenService.AccessToken(res.data.Token)
+
         dispatch({
           type: ActionType.POST_USER,
           data: res.data.item,
@@ -77,10 +81,12 @@ export const POST_SIGNUSER = (data: any) => {
   };
 };
 export const POST_LOGUSER = (data: any) => {
+  console.log("888888",data)
   return async (dispatch: any) => {
     await axios
-      .post("http://localhost:3002/login", data)
+      .post("http://localhost:3002/login",data)
       .then((res) => {
+        console.log("resssss",res)
         TokenService.AccessToken(res.data.Token)
         TokenService.RefreshToken(res.data.Token)
         dispatch({
