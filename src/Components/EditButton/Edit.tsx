@@ -26,7 +26,6 @@ const Edit = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...Data, [e.target.name]: e.target.value });
-    console.log(Data, "Initial Data");
   };
 
   let { id } = useParams();
@@ -42,7 +41,6 @@ const Edit = () => {
       console.log(error, "getapiErrorFrom Edit");
     });
   },[])
-  console.log(putData,"setPutData");
   
   useEffect(() => {
     if (putData) {
