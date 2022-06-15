@@ -14,7 +14,6 @@ interface Edituser{
   id:String|Number,
 }
 const Edit = () => {
-  console.log("EDIT POPUP")
   let dispatch:any = useDispatch();
   let navigate = useNavigate();
   const [putData,setPutData]= useState<any>()
@@ -31,7 +30,6 @@ const Edit = () => {
   };
 
   let { id } = useParams();
-  console.log("newid",id);
 
   useEffect(()=>{
     axios
