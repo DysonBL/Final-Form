@@ -9,11 +9,11 @@ import { GET_USER,POST_LOGUSER } from "../Redux/ActionType";
 import { v4 as uuidv4 } from 'uuid';
 
 const Forms = () => {
-  const required = (values: any) => (values ? undefined : "must fil Name");
-  const mustBeMail = (values: any) => (values ? undefined : " fil in Email");
-  const mustBePass = (values: any) =>
+  const required = (values: string) => (values ? undefined : "must fil Name");
+  const mustBeMail = (values: string) => (values ? undefined : " fil in Email");
+  const mustBePass = (values: string) =>
     values ? undefined : "Fill in correct password";
-  const mustBeAge = (values: any) => (values ? undefined : " fil in Age");
+  const mustBeAge = (values: number) => (values ? undefined : " fil in Age");
 
   const [Show, setShow] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -21,7 +21,12 @@ const Forms = () => {
 
   let dispatch: any = useDispatch();
 
-  
+  interface Loginuser{
+    Name:String,
+    Email:String,
+    password:String|Number,
+    Age:Number,
+  }
 
   const [data, setData] = useState({
     id:uuidv4(),
@@ -35,6 +40,7 @@ const Forms = () => {
     setData(data);
     JSON.stringify(data);
     let Data = JSON.parse(localStorage.getItem("Sign") || "{}");
+    console.log(Data,"popdaataa")
     let userData = Data.find(
       (item: any) =>
         item.Name === data.Name &&

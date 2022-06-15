@@ -5,6 +5,13 @@ import "./Popup.css";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 
+interface popup{
+  id:Number|String,
+  Name:String,
+  Email:String,
+  Age:Number,
+  password:String|Number
+}
 
 function Popup(props:any) {
   let navigate = useNavigate()
@@ -17,7 +24,7 @@ function Popup(props:any) {
     Age: "",
   });
 
-  console.log(props, "popopp");
+  console.log(popData, "jgasjdgajgfls");
 
   const handleSubmit = () => {
     console.log("Accept");
@@ -30,7 +37,8 @@ function Popup(props:any) {
 
   useEffect(() => {
     if (props.passdata !== undefined) {
-      setPopData(props.passdata);
+      setPopData(props.passdata.item);
+      console.log(props.passdata.item,'popopop=====>')
       setPopShow(props.show);
     }
   }, [props.passdata, props.show]);

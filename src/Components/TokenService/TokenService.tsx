@@ -1,9 +1,14 @@
 
-const AccessToken=(user:any)=>{
+interface usertype{
+    user:string
+    Token:string
+}
+
+const AccessToken=(user:usertype)=>{
     console.log("userrrrr",user)
 localStorage.setItem("Access",JSON.stringify(user)||"{}");
 }
-const RefreshToken=(user:any)=>{
+const RefreshToken=(user:usertype)=>{
     localStorage.setItem("Refresh",JSON.stringify(user)||"{}");
 }
 const GetAccessToken=()=>{
@@ -12,7 +17,7 @@ const GetAccessToken=()=>{
 const GetRefreshToken =()=>{
     return JSON.parse(localStorage.getItem("Refresh")||"{}");
 }
-const UpdateAccessToken=(Token:any)=>{
+const UpdateAccessToken=(Token:usertype)=>{
     let user = JSON.parse(localStorage.getItem("Access")||"{}")
     user = Token
     localStorage.setItem("Access",JSON.stringify(user))

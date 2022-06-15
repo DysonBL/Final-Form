@@ -12,7 +12,13 @@ import { useNavigate } from "react-router-dom";
 import "./Signup.css"
 import { v4 as uuidv4 } from 'uuid';
 
-
+interface user{
+  Name:String,
+  Email:String,
+  password:String|Number,
+  Age:Number,
+  
+}
 const Signup = () => {
 
   let dispatch: any = useDispatch()
@@ -28,10 +34,10 @@ const Signup = () => {
     checkbox: ""
   });
   console.log(Data,"signupData")
-  const handleChange = async (e: any) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...Data, [e.target.name]: e.target.value });
   };
-  const signSubmit = (e: any) => {
+  const signSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setValidate(true);
     dispatch(POST_SIGNUSER(Data))

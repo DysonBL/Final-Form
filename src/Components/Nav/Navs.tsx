@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
+
 import {
     Navbar,
     Container,
@@ -8,10 +10,12 @@ import {
     
   } from "react-bootstrap";
 
-const Navs =()=>{       
+const Navs =()=>{   
+  let navigate =useNavigate()    
     const handleSubmit=()=>{
-      localStorage.removeItem("Login")
-      // window.location.reload(true);
+      localStorage.removeItem("Access")
+      navigate("/Form")
+      console.log("logout",localStorage)
     }
   return (
     <div>

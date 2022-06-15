@@ -5,7 +5,7 @@ const initialState = {
 };
 export const UserReducer = (
   state = initialState,
-  action: { type: any; data: any }
+  action: { type: string; data: String|Number }
 ) => {
   
   switch (action.type) {

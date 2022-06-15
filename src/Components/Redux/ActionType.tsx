@@ -1,5 +1,6 @@
 import axios from "axios";
 import TokenService from '../TokenService/TokenService';
+import {Dispatch} from "redux";
 
 export const ActionType = {
   GET_USER: "GET_USER",
@@ -12,7 +13,7 @@ export const ActionType = {
 
 
 export const GET_USER = () => {
-  return async (dispatch:any) => {
+  return async (dispatch:Dispatch) => {
     await axios
       .get(`http://localhost:3002/Data`)
       .then((res) => {
@@ -30,7 +31,8 @@ export const GET_USER = () => {
 
 export const DELETE_USER =(data:any)=>{
   console.log(data,"deletedispatch")
-    return async(dispatch:any)=>{
+    return async(dispatch:Dispatch)=>{
+
         await axios.delete(`http://localhost:3002/Data/${data}`)
         .then((res)=>{
             console.log(res,"deleteAPiIn DELETE_USER")
@@ -48,7 +50,7 @@ export const DELETE_USER =(data:any)=>{
 export const PUT_USER =(id:any,Data:any)=>{
   console.log(id,Data,"id and data editt")
   
-    return async(dispatch:any)=>{
+    return async(dispatch:Dispatch)=>{
         await axios.put(`http://localhost:3002/Data/${id}`,Data)
         .then((res)=>{
             console.log(res,"EDITAPIDATAA")
@@ -64,7 +66,9 @@ export const PUT_USER =(id:any,Data:any)=>{
 }
 
 export const POST_SIGNUSER = (data: any) => {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch) => {
+          console.log(typeof dispatch,"hfqoiyiofwyqpiyfqw")
+
     await axios
       .post("http://localhost:3002/signup", data)
       .then((res) => {
@@ -82,7 +86,7 @@ export const POST_SIGNUSER = (data: any) => {
 };
 export const POST_LOGUSER = (data: any) => {
   console.log("888888",data)
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch) => {
     await axios
       .post("http://localhost:3002/login",data)
       .then((res) => {

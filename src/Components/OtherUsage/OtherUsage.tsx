@@ -69,3 +69,4 @@ export const POST_USER = (Data:any) => {
     };
 }
 */
+   /* {auth ? <PrivateRoute/> : <Public/>} */

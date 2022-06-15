@@ -7,18 +7,25 @@ import { useDispatch} from "react-redux";
 import {  PUT_USER } from "../Redux/ActionType";
 import axios from "axios";
 
+interface Edituser{
+  Name:String,
+  Email:String,
+  Age:Number,
+  id:String|Number,
+}
 const Edit = () => {
   console.log("EDIT POPUP")
   let dispatch:any = useDispatch();
   let navigate = useNavigate();
   const [putData,setPutData]= useState<any>()
-  const [Data, setData] = useState<any>({
+  const [Data, setData] = useState({
     Name: '',
     Email:"",
-    Age: ""
+    Age: "",
+    id:""
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...Data, [e.target.name]: e.target.value });
     console.log(Data, "Initial Data");
   };
@@ -46,7 +53,7 @@ const Edit = () => {
   }, [putData]);
   console.log(Data, "EDITData");
 
-  const handleCreate = (e:any) => {
+  const handleCreate = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(PUT_USER(Data.id,Data))
     navigate("/Page");
