@@ -8,7 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { GET_USER,POST_LOGUSER } from "../Redux/ActionType";
 import { v4 as uuidv4 } from 'uuid';
 
-const Forms = () => {
+interface Loginuser{
+  user:{
+    Name:String,
+    Email:String,
+    password:String|Number,
+    Age:Number,
+  } 
+}
+const Forms: React.FC<Loginuser> = ({user}) => {
+
   const required = (values: string) => (values ? undefined : "must fil Name");
   const mustBeMail = (values: string) => (values ? undefined : " fil in Email");
   const mustBePass = (values: string) =>
@@ -19,15 +28,7 @@ const Forms = () => {
   const [showPopup, setShowPopup] = useState(false);
   const userData = useSelector((state: any) => state.UserReducer.user);
 
-  let dispatch: any = useDispatch();
-
-  interface Loginuser{
-    Name:String,
-    Email:String,
-    password:String|Number,
-    Age:Number,
-  }
-
+  let dispatch:any = useDispatch();
   const [data, setData] = useState({
     id:uuidv4(),
     Name: "",
@@ -78,7 +79,7 @@ const Forms = () => {
         initialValues={{ Name: "", Email: "", password: "", Age: "",id:"" }}
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
-            <h1>Final Form</h1>
+            <h1>Login Form</h1>
             <hr />
             <div>
               <Field name="Name" validate={required}>

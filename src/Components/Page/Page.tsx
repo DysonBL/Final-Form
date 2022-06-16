@@ -10,12 +10,13 @@ interface user{
   Name:String,
   Email:String,
   Age:Number,
-  id:String|Number
+  id:any
 }
 function Page() {
   let navigate = useNavigate();
   const [userData, setUserData] = useState<any[]>();
-
+  
+ 
   let dispatch: any = useDispatch();
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function Page() {
     <div>
       <h1>Welcome My Home Page</h1>
       <div className="row sm-6 ">
-        {userData?.map((data: any) => {
+        {userData?.map((data: user) => {
           return (
             <div className="col-3 mx-5 mt-3">
               <Card style={{ width: "20rem" }} className="cardStyle">

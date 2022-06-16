@@ -10,3 +10,4 @@ const reducer = combineReducers({
 });
 const middleware = [thunk];
 export const Store = createStore(reducer, applyMiddleware(...middleware));
+// export type AppDispatch = typeof Store.dispatch;

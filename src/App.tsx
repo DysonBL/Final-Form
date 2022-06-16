@@ -10,6 +10,7 @@ import PrivateRoute from "./Components/PrivateRouting/PrivateRoute";
 
 
 const App = () => {
+
   return (
     <div>
       <Navs/>

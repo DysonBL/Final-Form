@@ -12,14 +12,15 @@ import { useNavigate } from "react-router-dom";
 import "./Signup.css"
 import { v4 as uuidv4 } from 'uuid';
 
+
 interface user{
-  Name:String,
-  Email:String,
-  password:String|Number,
+  Name:string,
+  Email:string,
+  password:string|Number,
   Age:Number,
   
 }
-const Signup = () => {
+const Signup = ()=> {
 
   let dispatch: any = useDispatch()
   let navigate = useNavigate()
