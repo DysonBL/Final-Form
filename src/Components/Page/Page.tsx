@@ -49,7 +49,7 @@ function Page() {
     <div>
       <h1>Welcome My Home Page</h1>
       <div className="row sm-6 ">
-        {userData?.map((data: user) => {
+        {userData?.map((data: any) => {
           return (
             <div className="col-3 mx-5 mt-3">
               <Card style={{ width: "20rem" }} className="cardStyle">

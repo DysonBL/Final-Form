@@ -15,6 +15,7 @@ interface popup{
 }
 
 function Popup(props:any) {
+  console.log(props,"hiidyson")
   let navigate = useNavigate()
   const [popShow, setPopShow] = useState(false);
   const [popData, setPopData] = useState({
@@ -37,6 +38,7 @@ function Popup(props:any) {
   };
 
   useEffect(() => {
+    console.log(props,"hiiiiiiiiiii")
     if (props.passdata !== undefined) {
       setPopData(props.passdata.item);
       console.log(props.passdata.item,'popopop=====>')

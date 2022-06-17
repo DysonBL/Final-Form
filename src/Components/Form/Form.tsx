@@ -9,14 +9,13 @@ import { GET_USER,POST_LOGUSER } from "../Redux/ActionType";
 import { v4 as uuidv4 } from 'uuid';
 
 interface Loginuser{
-  user:{
     Name:String,
     Email:String,
     password:String|Number,
     Age:Number,
-  } 
+  
 }
-const Forms: React.FC<Loginuser> = ({user}) => {
+const Forms = () => {
 
   const required = (values: string) => (values ? undefined : "must fil Name");
   const mustBeMail = (values: string) => (values ? undefined : " fil in Email");
@@ -54,11 +53,14 @@ const Forms: React.FC<Loginuser> = ({user}) => {
     if (userData) {
       setShowPopup(true);
       setShow(true);
+
     let value={
         Name:data.Name,
         Email:data.Email,
         password:data.password
     }
+    console.log(value,"dissspatch")
+
       dispatch(POST_LOGUSER(value))
       dispatch(GET_USER())
     } else {

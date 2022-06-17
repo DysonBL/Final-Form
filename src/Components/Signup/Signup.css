@@ -2,41 +2,37 @@ body {
   background-color: #e0e0e0;
 }
 h1 {
-    text-align: center;
-    color: rgb(6, 85, 6);
-  }
-  h4{
-    color: darkgreen;
-  }
-  
-  .lable {
-    color: rgb(24, 123, 19);
-  }
-  .sign {
+  text-align: center;
+  color: rgb(6, 85, 6);
+}
+h4 {
+  color: darkgreen;
+}
 
-    margin-top:0px;
-  }
-  .Margin {
-    margin-top: 0rem;
-    border-radius: 47px;
-    background: linear-gradient(145deg, #f0f0f0, #cacaca);
-    box-shadow:  5px 5px 10px #bebebe,
-                 -5px -5px 10px #ffffff;
-             margin-left: 10rem;
-             margin-right:  10rem;
-             max-height: 800px;
-  }
-  
-  .signbut {
-    margin-top: 2px;
-    margin-left: 2rem;
-  }
-  .btnAlign {
-    padding-top: 1rem;
-    text-align: center;
-  }
-  .inputFieldAlign{
-    width: 12rem;
-  }
-  
- 
+.lable {
+  color: rgb(24, 123, 19);
+}
+.sign {
+  margin-top: 0px;
+}
+.Margin {
+  margin-top: 0rem;
+  border-radius: 47px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  max-height: 800px;
+}
+
+.signbut {
+  margin-top: 2px;
+  margin-left: 2rem;
+}
+.btnAlign {
+  padding-top: 1rem;
+  text-align: center;
+}
+.inputFieldAlign {
+  width: 12rem;
+}
